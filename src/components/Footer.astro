@@ -1,0 +1,101 @@
+---
+import { ACQUISITION_MAILTO, SITE } from '../config/site';
+import AcquisitionCTA from './AcquisitionCTA.astro';
+---
+
+<footer id="acquire" class="relative border-t border-slate-200 bg-white">
+  <!-- Sophisticated domain acquisition CTA -->
+  <div class="footer-cta-glow relative overflow-hidden tech-grid">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="relative max-w-screen-2xl mx-auto px-8 py-20 md:py-28">
+      <div class="bg-white rounded-[2rem] border border-indigo-200/60 shadow-xl shadow-indigo-900/5 p-8 md:p-14">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+          <div class="md:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="text-xs font-bold uppercase tracking-[2px] text-emerald-700">Domain Available for Acquisition</span>
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-display tracking-tight leading-tight text-slate-900">
+              Acquire <span class="text-indigo-600">{SITE.name}</span> — a premium Phoenix digital asset
+            </h2>
+
+            <p class="text-lg text-slate-600 max-w-xl">
+              For domain investors, local platform builders, PropTech founders, and enterprise buyers seeking an ultra-short, exact-match .contact domain. Direct owner negotiation — escrow available.
+            </p>
+
+            <dl class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2 text-left">
+              <div>
+                <dt class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Characters</dt>
+                <dd class="font-bold text-slate-900">10</dd>
+              </div>
+              <div>
+                <dt class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">TLD</dt>
+                <dd class="font-bold text-slate-900">.contact</dd>
+              </div>
+              <div>
+                <dt class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Market</dt>
+                <dd class="font-bold text-slate-900">Phoenix</dd>
+              </div>
+              <div>
+                <dt class="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Transfer</dt>
+                <dd class="font-bold text-emerald-600">Immediate</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="md:col-span-5 flex flex-col items-center md:items-stretch gap-5">
+            <div class="w-full p-6 rounded-2xl bg-slate-50 border border-slate-200 text-center md:text-left">
+              <div class="text-xs uppercase tracking-[2px] text-slate-500 mb-2 font-semibold">Acquisition Contact</div>
+              <a
+                href={ACQUISITION_MAILTO}
+                class="text-xl sm:text-2xl font-display font-semibold text-indigo-600 hover:text-indigo-500 transition-colors break-all"
+              >
+                {SITE.email}
+              </a>
+              <p class="text-sm text-slate-500 mt-3">Response within 24 hours. Escrow available.</p>
+            </div>
+
+            <AcquisitionCTA
+              variant="primary"
+              size="md"
+              label="Inquire About phx.contact"
+              class="w-full !rounded-2xl"
+            />
+
+            <p class="text-[11px] text-slate-400 text-center md:text-left leading-relaxed">
+              By contacting us, you acknowledge this is a demonstration listing. Terms subject to negotiation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal disclaimer + meta footer -->
+  <div class="max-w-screen-2xl mx-auto px-8 pb-12">
+    <div class="pt-10 border-t border-slate-200">
+      <p class="text-xs text-slate-500 leading-relaxed max-w-4xl mb-8">
+        This website is for demonstration and informational purposes only. It does not constitute an offer of services,
+        a commitment to deploy, or a guarantee of outcomes. All statistics, projections, and references to specific
+        technologies are based on publicly available information as of {SITE.lastUpdated} and are subject to change.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-y-4 items-start md:items-center justify-between text-xs text-slate-500">
+        <div>© {new Date().getFullYear()} {SITE.name} — Premium Strategic Asset</div>
+        <div class="flex flex-wrap gap-x-6 gap-y-2">
+          <span>{SITE.location}</span>
+          <span>Clean Title</span>
+          <span>Ready for Immediate Transfer</span>
+        </div>
+        <a href={ACQUISITION_MAILTO} class="hover:text-slate-900 transition-colors font-medium">
+          {SITE.email}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

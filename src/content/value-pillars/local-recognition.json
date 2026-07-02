@@ -1,0 +1,7 @@
+{
+  "title": "Instant Local Recognition",
+  "description": "PHX is the official airport code and the most common local shorthand for Phoenix. Every resident, business, and visitor instantly understands it.",
+  "icon": "map-marker",
+  "gradient": "from-slate-700 to-slate-900",
+  "order": 3
+}

@@ -1,0 +1,43 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  src,
+  alt,
+  width = 1200,
+  height = 630,
+  class: className = '',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+} = Astro.props;
+
+function resolveCfImageUrl(base: string): string {
+  const match = base.match(
+    /^https:\/\/imagedelivery\.net\/([^/]+)\/([^/]+)(?:\/([^/]+))?$/,
+  );
+  if (!match) return base;
+  const [, account, id, variant = 'public'] = match;
+  return `https://imagedelivery.net/${account}/${id}/${variant}`;
+}
+
+const imageSrc = resolveCfImageUrl(src);
+---
+
+<img
+  src={imageSrc}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+  class={className}
+/>

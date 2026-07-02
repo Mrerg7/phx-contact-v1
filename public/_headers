@@ -1,0 +1,13 @@
+# Canonical enforcement
+https://phx.contact/*
+  Link: <https://phx.contact>; rel="canonical"
+
+# No index for 404s
+/404.html
+  X-Robots-Tag: noindex
+
+# Security headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin

@@ -1,0 +1,14 @@
+{
+  "path": "PATH 1",
+  "title": "Build the Premier PHX Contact Platform",
+  "description": "Launch a powerful local contact and lead infrastructure hub for Phoenix — a centralized platform for business directories, lead capture tools, CRM integrations, or a premium contact/relationship management service tailored to the Phoenix market.",
+  "icon": "globe",
+  "tags": [
+    "Local Lead Generation Platform",
+    "Business Contact Directory",
+    "CRM / Relationship Tools",
+    "Event & Networking Hub"
+  ],
+  "tagStyle": "pills",
+  "order": 1
+}
