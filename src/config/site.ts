@@ -8,13 +8,16 @@ export const SITE = {
   email: 'sales@desertrich.com',
   location: 'Phoenix, Arizona',
   lastUpdated: '2026-07-02',
+  googleSiteVerification: 'SkPROS6JT6WWkd2L1YtjKQYw1XjdnfpyuRPlSuHyq6c',
 } as const;
 
 export const CF_IMAGES = {
-  hero: 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/5600ee62-4d72-4a73-4f62-cecd20449900/public',
-  secondary: 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/a9ac8cce-d80e-4b63-12e4-733323b42900/public',
-  og: 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/5600ee62-4d72-4a73-4f62-cecd20449900/public',
+  hero: 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/7b21c756-95d6-4036-73f3-26390fe36600/public',
+  secondary: 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/41e7ab0a-fc1d-4a3e-fb87-31c085809f00/public',
+  og: 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/7b21c756-95d6-4036-73f3-26390fe36600/public',
   accountHash: '-sPAUAWeA405NiWJ0SNIQA',
+  imageId: '7b21c756-95d6-4036-73f3-26390fe36600',
+  secondaryImageId: '41e7ab0a-fc1d-4a3e-fb87-31c085809f00',
 } as const;
 
 export const ACQUISITION_MAILTO = `mailto:${SITE.email}?subject=${encodeURIComponent('Acquisition Inquiry: phx.contact')}&body=${encodeURIComponent('Hello,\n\nI am interested in acquiring phx.contact. Please share next steps.\n\nThank you,')}`;
