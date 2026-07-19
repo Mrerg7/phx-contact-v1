@@ -26,10 +26,16 @@
   }
 
   .section-header {
-    font-size: 2.75rem;
+    font-size: 2rem;
     line-height: 1.1;
     font-weight: 700;
     letter-spacing: -0.025em;
+  }
+
+  @media (min-width: 40rem) {
+    .section-header {
+      font-size: 2.75rem;
+    }
   }
 
   .modern-card {
@@ -49,7 +55,7 @@
   }
 
   .domain-hero {
-    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    background: #0f172a;
   }
 
   .use-case-icon {
