@@ -7,8 +7,10 @@ export const SITE = {
   locale: 'en_US',
   email: 'sales@desertrich.com',
   location: 'Phoenix, Arizona',
-  lastUpdated: '2026-07-02',
+  lastUpdated: '2026-08-20',
   googleSiteVerification: 'SkPROS6JT6WWkd2L1YtjKQYw1XjdnfpyuRPlSuHyq6c',
+  /** Visible acquisition range for AggregateOffer — keep in sync with on-page copy. */
+  valuation: { low: 35000, high: 65000, currency: 'USD' },
 } as const;
 
 export const CF_IMAGES = {

@@ -7,7 +7,9 @@ import TrustBar from '../components/TrustBar.astro';
 import CloudflareImage from '../components/CloudflareImage.astro';
 import AcquisitionCTA from '../components/AcquisitionCTA.astro';
 import Footer from '../components/Footer.astro';
-import { CF_IMAGES } from '../config/site';
+import { CF_IMAGES, SITE } from '../config/site';
+
+const valuationLabel = `$${SITE.valuation.low.toLocaleString()}–$${SITE.valuation.high.toLocaleString()} ${SITE.valuation.currency}`;
 
 const sortByOrder = <T extends { data: { order: number } }>(items: T[]) =>
   items.sort((a, b) => a.data.order - b.data.order);
@@ -202,7 +204,7 @@ const iconPaths: Record<string, string> = {
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
             </svg>
-            <span class="font-medium">Premium acquisition. All serious offers considered. Escrow recommended.</span>
+            <span class="font-medium">Premium acquisition · Guidance {valuationLabel}. All serious offers considered. Escrow recommended.</span>
           </div>
         </div>
       </div>

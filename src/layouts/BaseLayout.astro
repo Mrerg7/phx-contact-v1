@@ -44,25 +44,63 @@ const structuredData = {
         addressCountry: 'US',
       },
     },
+    // Domain listing as Service + AggregateOffer (not Product).
+    // Product markup triggered Search Console critical "price" / "priceCurrency"
+    // errors and non-critical aggregateRating/review warnings. Fabricating
+    // reviews violates Google spam policies; this page has no real reviews.
     {
-      '@type': 'Product',
+      '@type': 'Service',
       '@id': `${SITE.url}/#domain`,
       name: 'PHX.Contact Premium Domain',
       description:
         'Premium ultra-short .contact domain for Phoenix. Ideal for contact platforms, lead generation, real estate tech, or premium local branding.',
-      url: SITE.url,
       category: 'Domain Name',
-      offers: {
-        '@type': 'Offer',
-        availability: 'https://schema.org/InStock',
-        seller: { '@id': `${SITE.url}/#organization` },
-        url: `mailto:${SITE.email}`,
-      },
-      brand: {
-        '@type': 'Brand',
-        name: SITE.name,
-      },
       image: ogImageUrl,
+      provider: { '@id': `${SITE.url}/#organization` },
+      offers: {
+        '@type': 'AggregateOffer',
+        '@id': `${SITE.url}/#domain-offer`,
+        priceCurrency: SITE.valuation.currency,
+        lowPrice: SITE.valuation.low,
+        highPrice: SITE.valuation.high,
+        offerCount: 1,
+        availability: 'https://schema.org/InStock',
+        url: SITE.url,
+        seller: { '@id': `${SITE.url}/#organization` },
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '0.00',
+            currency: 'USD',
+          },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 1,
+              unitCode: 'DAY',
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 0,
+              unitCode: 'DAY',
+            },
+          },
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'US',
+          },
+        },
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+          applicableCountry: 'US',
+          merchantReturnDays: 0,
+        },
+      },
     },
     {
       '@type': 'WebPage',
@@ -84,7 +122,9 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="google-site-verification" content={SITE.googleSiteVerification} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
