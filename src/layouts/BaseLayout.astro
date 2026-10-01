@@ -7,6 +7,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  faq?: { question: string; answer: string }[];
 }
 
 const {
@@ -14,6 +15,7 @@ const {
   description = SITE.description,
   ogImage = CF_IMAGES.og,
   noindex = false,
+  faq = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
@@ -113,6 +115,29 @@ const structuredData = {
       inLanguage: 'en-US',
       dateModified: SITE.lastUpdated,
     },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+        { '@type': 'ListItem', position: 2, name: 'Why this domain', item: `${SITE.url}/#why` },
+        { '@type': 'ListItem', position: 3, name: 'Opportunity', item: `${SITE.url}/#opportunity` },
+        { '@type': 'ListItem', position: 4, name: 'Strategic value', item: `${SITE.url}/#value` },
+        { '@type': 'ListItem', position: 5, name: 'FAQ', item: `${SITE.url}/#faq` },
+        { '@type': 'ListItem', position: 6, name: 'Acquire', item: `${SITE.url}/#acquire` },
+      ],
+    },
+    ...(faq.length > 0
+      ? [
+          {
+            '@type': 'FAQPage',
+            mainEntity: faq.map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: { '@type': 'Answer', text: item.answer },
+            })),
+          },
+        ]
+      : []),
   ],
 };
 ---
@@ -167,11 +192,44 @@ const structuredData = {
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
+    <!-- Fonts: stylesheet link (non-blocking) replaces CSS @import for faster LCP -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://imagedelivery.net" />
+    <link rel="preconnect" href="https://imagedelivery.net" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      href={CF_IMAGES.hero}
+      fetchpriority="high"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    {SITE.cfBeaconToken && (
+      <script
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${SITE.cfBeaconToken}"}`}
+      />
+    )}
   </head>
   <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-white focus:text-slate-900 focus:px-4 focus:py-2 focus:rounded-xl focus:text-sm focus:font-semibold"
+    >
+      Skip to content
+    </a>
     <slot />
   </body>
 </html>

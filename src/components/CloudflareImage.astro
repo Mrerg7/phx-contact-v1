@@ -7,6 +7,8 @@ interface Props {
   class?: string;
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
+  responsive?: boolean;
+  sizes?: string;
 }
 
 const {
@@ -17,6 +19,8 @@ const {
   class: className = '',
   loading = 'lazy',
   fetchpriority = 'auto',
+  responsive = false,
+  sizes = '100vw',
 } = Astro.props;
 
 function resolveCfImageUrl(base: string): string {
@@ -28,11 +32,23 @@ function resolveCfImageUrl(base: string): string {
   return `https://imagedelivery.net/${account}/${id}/${variant}`;
 }
 
+function variantUrl(base: string, w: number): string {
+  const match = base.match(/^https:\/\/imagedelivery\.net\/([^/]+)\/([^/]+)(?:\/[^/]+)?$/);
+  if (!match) return base;
+  const [, account, id] = match;
+  return `https://imagedelivery.net/${account}/${id}/w=${w}`;
+}
+
 const imageSrc = resolveCfImageUrl(src);
+const srcset = responsive
+  ? [640, 960, 1280, 1920].map((w) => `${variantUrl(src, w)} ${w}w`).join(', ')
+  : undefined;
 ---
 
 <img
   src={imageSrc}
+  srcset={srcset}
+  sizes={responsive ? sizes : undefined}
   alt={alt}
   width={width}
   height={height}

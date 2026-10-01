@@ -21,12 +21,13 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
         <a href="#why" class="text-slate-600 hover:text-slate-900 transition-colors">Why This Domain</a>
         <a href="#opportunity" class="text-slate-600 hover:text-slate-900 transition-colors">The Opportunity</a>
         <a href="#value" class="text-slate-600 hover:text-slate-900 transition-colors">Strategic Value</a>
+        <a href="#faq" class="text-slate-600 hover:text-slate-900 transition-colors">FAQ</a>
         <a href="#acquire" class="text-slate-600 hover:text-slate-900 transition-colors">How to Acquire</a>
       </div>
 
       <div class="flex items-center gap-x-3">
-        <AcquisitionCTA variant="outline" size="sm" label="Make an Offer" class="hidden sm:inline-flex !rounded-2xl" />
-        <AcquisitionCTA variant="primary" size="sm" label="Inquire Now" class="!rounded-2xl !px-6 !py-2.5 !text-sm" />
+        <AcquisitionCTA variant="outline" size="sm" label="Make an Offer" mode="offer" track="nav-make-offer" class="hidden sm:inline-flex !rounded-2xl" />
+        <AcquisitionCTA variant="primary" size="sm" label="Buy Now" mode="buy" track="nav-buy-now" class="!rounded-2xl !px-6 !py-2.5 !text-sm" />
 
         <button
           id="mobile-menu-btn"
@@ -55,13 +56,15 @@ import AcquisitionCTA from './AcquisitionCTA.astro';
       <button id="mobile-menu-close" type="button" class="text-3xl text-slate-400 hover:text-slate-600" aria-label="Close menu">&times;</button>
     </div>
     <div class="flex flex-col gap-y-1 text-lg font-medium">
-      <a href="#why" class="mobile-nav-link py-3 px-1 text-slate-700 hover:text-slate-900 border-b border-slate-100">Why This Domain</a>
-      <a href="#opportunity" class="mobile-nav-link py-3 px-1 text-slate-700 hover:text-slate-900 border-b border-slate-100">The Opportunity</a>
-      <a href="#value" class="mobile-nav-link py-3 px-1 text-slate-700 hover:text-slate-900 border-b border-slate-100">Strategic Value</a>
-      <a href="#acquire" class="mobile-nav-link py-3 px-1 text-slate-700 hover:text-slate-900 border-b border-slate-100">How to Acquire</a>
+      <a href="#why" class="mobile-nav-link py-3 px-1 min-h-[48px] inline-flex items-center text-slate-700 hover:text-slate-900 border-b border-slate-100">Why This Domain</a>
+      <a href="#opportunity" class="mobile-nav-link py-3 px-1 min-h-[48px] inline-flex items-center text-slate-700 hover:text-slate-900 border-b border-slate-100">The Opportunity</a>
+      <a href="#value" class="mobile-nav-link py-3 px-1 min-h-[48px] inline-flex items-center text-slate-700 hover:text-slate-900 border-b border-slate-100">Strategic Value</a>
+      <a href="#faq" class="mobile-nav-link py-3 px-1 min-h-[48px] inline-flex items-center text-slate-700 hover:text-slate-900 border-b border-slate-100">FAQ</a>
+      <a href="#acquire" class="mobile-nav-link py-3 px-1 min-h-[48px] inline-flex items-center text-slate-700 hover:text-slate-900 border-b border-slate-100">How to Acquire</a>
     </div>
-    <div class="mt-8">
-      <AcquisitionCTA variant="primary" size="sm" label="Make an Offer" class="w-full !rounded-2xl" />
+    <div class="mt-8 flex flex-col gap-2">
+      <AcquisitionCTA variant="primary" size="sm" label="Buy Now — $35K–$65K" mode="buy" track="mobile-buy-now" class="w-full !rounded-2xl" />
+      <AcquisitionCTA variant="outline" size="sm" label="Make an Offer" mode="offer" track="mobile-make-offer" class="w-full !rounded-2xl" />
     </div>
   </div>
 </div>

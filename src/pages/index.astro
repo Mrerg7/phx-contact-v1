@@ -7,7 +7,34 @@ import TrustBar from '../components/TrustBar.astro';
 import CloudflareImage from '../components/CloudflareImage.astro';
 import AcquisitionCTA from '../components/AcquisitionCTA.astro';
 import Footer from '../components/Footer.astro';
+import Faq from '../components/Faq.astro';
+import SocialProof from '../components/SocialProof.astro';
+import OfferModal from '../components/OfferModal.astro';
+import StickyCta from '../components/StickyCta.astro';
 import { CF_IMAGES, SITE } from '../config/site';
+
+const faqSchema = [
+  {
+    question: 'How much is PHX.Contact listed for?',
+    answer:
+      'Guided $35,000–$65,000 USD depending on use, timeline, and terms. All serious offers are considered; offers above $40,000 receive priority review via Escrow.com or Dan.com.',
+  },
+  {
+    question: 'How does the secure purchase process work?',
+    answer:
+      'Submit an offer or start Buy Now, agree on price and escrow provider, fund escrow, then the domain is pushed or transferred via authorization code. Funds release only after you confirm control.',
+  },
+  {
+    question: 'Is PHX.Contact a premium investment domain?',
+    answer:
+      'Yes. A 10-character ultra-short geo + exact-match .contact asset for Phoenix, suited to lead generation, CRM, contact platforms, and premium local branding in a 5M+ metro.',
+  },
+  {
+    question: 'How fast is transfer and what guarantees do I get?',
+    answer:
+      'Transfer typically completes within 1–3 business days after escrow funds clear, with clean title, escrow buyer protection, and written confirmation.',
+  },
+];
 
 const valuationLabel = `$${SITE.valuation.low.toLocaleString()}–$${SITE.valuation.high.toLocaleString()} ${SITE.valuation.currency}`;
 
@@ -35,9 +62,9 @@ const iconPaths: Record<string, string> = {
 };
 ---
 
-<BaseLayout>
+<BaseLayout faq={faqSchema}>
   <Nav />
-  <main>
+  <main id="main">
     <Hero />
     <TrustBar />
 
@@ -47,9 +74,11 @@ const iconPaths: Record<string, string> = {
         <div class="rounded-3xl overflow-hidden border border-slate-200 ring-1 ring-slate-100">
           <CloudflareImage
             src={CF_IMAGES.secondary}
-            alt="Phoenix, Arizona — premium local market for PHX.Contact domain acquisition"
+            alt="Downtown Phoenix, Arizona — premium local market for PHX.Contact domain acquisition"
             width={1920}
             height={800}
+            responsive={true}
+            sizes="(max-width: 768px) 100vw, 1400px"
             class="w-full h-auto object-cover aspect-[21/9]"
           />
         </div>
@@ -211,7 +240,7 @@ const iconPaths: Record<string, string> = {
     </section>
 
     <!-- How to Acquire -->
-    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+    <section id="acquire" class="max-w-screen-2xl mx-auto px-5 sm:px-8 py-20 scroll-mt-24">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
           <div class="inline px-4 py-1 text-xs font-bold tracking-widest bg-slate-100 text-slate-600 rounded-2xl">
@@ -236,17 +265,22 @@ const iconPaths: Record<string, string> = {
       </div>
     </section>
 
+    <SocialProof />
+
+    <Faq />
+
     <!-- Final CTA -->
     <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-black py-16 text-white">
-      <div class="max-w-screen-2xl mx-auto px-8 text-center">
+      <div class="max-w-screen-2xl mx-auto px-5 sm:px-8 text-center">
         <div class="max-w-lg mx-auto">
           <h2 class="font-display text-3xl sm:text-4xl md:text-5xl tracking-tighter">Ready to own PHX.Contact?</h2>
           <p class="mt-4 text-white/70">
-            This is a rare, high-value strategic asset in one of America's most dynamic growth markets. Serious inquiries only.
+            Guided {valuationLabel} via secure escrow. Serious inquiries only.
           </p>
 
-          <div class="mt-9">
-            <AcquisitionCTA variant="light" size="lg" label="Submit Confidential Offer" class="w-full sm:w-auto" />
+          <div class="mt-9 flex flex-col sm:flex-row gap-3 justify-center">
+            <AcquisitionCTA variant="light" size="lg" label="Buy Now via Escrow" mode="buy" track="final-buy-now" class="w-full sm:w-auto" />
+            <AcquisitionCTA variant="secondary" size="lg" label="Make an Offer" mode="offer" track="final-make-offer" class="w-full sm:w-auto" />
           </div>
 
           <div class="mt-5 text-xs text-white/50">Confidential • Qualified buyers only • Response within 24 hours</div>
@@ -256,4 +290,6 @@ const iconPaths: Record<string, string> = {
   </main>
 
   <Footer />
+  <OfferModal />
+  <StickyCta />
 </BaseLayout>

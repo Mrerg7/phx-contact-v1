@@ -1,16 +1,18 @@
 export const SITE = {
   name: 'phx.contact',
-  title: 'PHX.Contact | Premium Phoenix Domain for Sale | Ultra-Short Brandable .contact',
+  title: 'PHX.Contact | Premium Domain for Sale | Ultra-Short Brandable .contact',
   description:
-    'Own PHX.Contact — the rare, brandable .contact domain for Phoenix. Ideal for contact platforms, lead gen, real estate tech, or premium local branding in one of America\'s fastest-growing metros.',
+    'PHX.Contact is for sale — premium ultra-short Phoenix .contact domain, guided $35,000–$65,000 USD via secure escrow. Make an offer or buy now. Response within 24 hours.',
   url: 'https://phx.contact',
   locale: 'en_US',
   email: 'sales@desertrich.com',
   location: 'Phoenix, Arizona',
-  lastUpdated: '2026-08-20',
+  lastUpdated: '2026-10-01',
   googleSiteVerification: 'SkPROS6JT6WWkd2L1YtjKQYw1XjdnfpyuRPlSuHyq6c',
   /** Visible acquisition range for AggregateOffer — keep in sync with on-page copy. */
   valuation: { low: 35000, high: 65000, currency: 'USD' },
+  /** Cloudflare Web Analytics token (free plan). Leave empty until added in dashboard; beacon loads only when set. */
+  cfBeaconToken: '',
 } as const;
 
 export const CF_IMAGES = {

@@ -1,0 +1,233 @@
+---
+import { SITE } from '../config/site';
+---
+
+<dialog
+  id="offer-modal"
+  class="backdrop:bg-black/60 rounded-3xl p-0 w-[calc(100%-2rem)] max-w-lg shadow-2xl text-slate-900"
+  aria-labelledby="offer-modal-title"
+>
+  <div class="bg-white rounded-3xl overflow-hidden">
+    <div class="px-6 sm:px-8 pt-7 pb-5 border-b border-slate-100 flex items-start justify-between gap-4">
+      <div>
+        <div id="offer-modal-title" class="font-display text-2xl tracking-tighter">Make a Confidential Offer</div>
+        <div class="text-xs text-slate-500 mt-1" data-offer-subtitle>PHX.Contact • Guided $35,000–$65,000 USD • Escrow protected</div>
+      </div>
+      <button
+        type="button"
+        data-close-offer
+        class="w-12 h-12 -m-1 flex items-center justify-center text-3xl leading-none text-slate-400 hover:text-slate-600"
+        aria-label="Close offer dialog"
+      >&times;</button>
+    </div>
+
+    <form id="offer-form" class="p-6 sm:p-8 space-y-5" novalidate>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label for="offer-name" class="block text-xs font-semibold tracking-wider text-slate-600 mb-1.5">FULL NAME</label>
+          <input
+            type="text" id="offer-name" name="name" required autocomplete="name" minlength="2"
+            class="w-full border border-slate-300 focus:border-indigo-600 rounded-2xl px-5 py-3 min-h-[48px] text-base outline-none transition-colors"
+            placeholder="Alex Rivera"
+          />
+        </div>
+        <div>
+          <label for="offer-email" class="block text-xs font-semibold tracking-wider text-slate-600 mb-1.5">EMAIL ADDRESS</label>
+          <input
+            type="email" id="offer-email" name="email" required autocomplete="email"
+            class="w-full border border-slate-300 focus:border-indigo-600 rounded-2xl px-5 py-3 min-h-[48px] text-base outline-none transition-colors"
+            placeholder="you@company.com"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="offer-use" class="block text-xs font-semibold tracking-wider text-slate-600 mb-1.5">INTENDED USE</label>
+        <select
+          id="offer-use" name="use" required
+          class="w-full border border-slate-300 focus:border-indigo-600 rounded-2xl px-5 py-3 min-h-[48px] text-base outline-none transition-colors bg-white"
+        >
+          <option value="">Select an option…</option>
+          <option>Build a PHX contact / lead generation platform</option>
+          <option>Premium branding for Phoenix business</option>
+          <option>Real estate tech / PropTech</option>
+          <option>Investment / strategic domain acquisition</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="offer-amount" class="block text-xs font-semibold tracking-wider text-slate-600 mb-1.5">YOUR OFFER (USD)</label>
+        <div class="relative">
+          <div class="absolute left-5 top-1/2 -translate-y-1/2 text-lg text-slate-400" aria-hidden="true">$</div>
+          <input
+            type="number" id="offer-amount" name="amount" required min="1000" step="100" inputmode="numeric"
+            placeholder="45000"
+            class="w-full border border-slate-300 focus:border-indigo-600 rounded-2xl pl-9 pr-5 py-3 min-h-[48px] text-base font-mono outline-none transition-colors"
+          />
+        </div>
+        <p class="text-xs text-slate-500 mt-1.5 px-1">Guided $35,000–$65,000. Offers above $40,000 receive priority review.</p>
+      </div>
+
+      <div>
+        <label for="offer-message" class="block text-xs font-semibold tracking-wider text-slate-600 mb-1.5">MESSAGE (OPTIONAL)</label>
+        <textarea
+          id="offer-message" name="message" rows="3"
+          class="w-full border border-slate-300 focus:border-indigo-600 rounded-2xl px-5 py-3 text-base outline-none transition-colors resize-y"
+          placeholder="Timeline, escrow preference, intended launch…"
+        ></textarea>
+      </div>
+
+      <!-- Honeypot for bots -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+      <p id="offer-error" class="hidden text-sm font-medium text-red-600" role="alert"></p>
+
+      <div class="pt-1">
+        <button
+          type="submit"
+          data-track="offer-submit"
+          class="w-full flex items-center justify-center gap-x-2 bg-slate-900 hover:bg-black active:bg-slate-950 transition-colors text-white font-semibold py-4 min-h-[48px] rounded-2xl text-base tracking-wide"
+        >
+          <span data-offer-submit-label>SUBMIT CONFIDENTIAL OFFER</span>
+        </button>
+        <div class="text-center mt-4">
+          <div class="text-xs text-slate-500">
+            Prefer email? <a href={`mailto:${SITE.email}?subject=${encodeURIComponent('Acquisition Inquiry: phx.contact')}`} class="font-medium text-slate-700 underline underline-offset-2">{SITE.email}</a>
+          </div>
+          <div class="text-[11px] text-slate-400 mt-1">Escrow.com / Dan.com recommended • Response within 24 hours</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<dialog
+  id="success-modal"
+  class="backdrop:bg-black/60 rounded-3xl p-0 w-[calc(100%-2rem)] max-w-md"
+  aria-labelledby="success-modal-title"
+>
+  <div class="bg-white rounded-3xl p-8 sm:p-9 text-center">
+    <div class="mx-auto w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+    </div>
+    <h3 id="success-modal-title" class="font-display text-2xl sm:text-3xl tracking-tight">Offer received.</h3>
+    <p class="mt-3 text-slate-600">Qualified offers are reviewed personally within 24 hours. For time-sensitive deals, email <a class="font-medium text-slate-900 underline underline-offset-2" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+    <div class="mt-8">
+      <button type="button" data-close-success class="w-full py-3.5 min-h-[48px] text-sm font-semibold border border-slate-300 hover:bg-slate-50 rounded-2xl transition-colors">
+        Close
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.getElementById('offer-modal');
+  const success = document.getElementById('success-modal');
+  const form = document.getElementById('offer-form');
+  const errorEl = document.getElementById('offer-error');
+  const subtitle = document.querySelector('[data-offer-subtitle]');
+  const submitLabel = document.querySelector('[data-offer-submit-label]');
+
+  function track(name) {
+    try {
+      window.dispatchEvent(new CustomEvent('phx:track', { detail: { name } }));
+      if (window.plausible) window.plausible(name);
+    } catch {}
+  }
+  document.querySelectorAll('[data-track]').forEach((el) => {
+    el.addEventListener('click', () => track(el.getAttribute('data-track') || 'cta'));
+  });
+
+  const MODES = {
+    buy: { sub: 'PHX.Contact • Buy Now via Escrow.com • Guided $35,000–$65,000', cta: 'START SECURE ESCROW PURCHASE', amount: '55000' },
+    offer: { sub: 'PHX.Contact • Guided $35,000–$65,000 USD • Escrow protected', cta: 'SUBMIT CONFIDENTIAL OFFER', amount: '' },
+    agent: { sub: 'PHX.Contact • Talk to the agent • Response within 24 hours', cta: 'REQUEST AGENT CALLBACK', amount: '' },
+  };
+
+  document.querySelectorAll('[data-open-offer]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      // Anchors carry a mailto href as no-JS fallback; prefer the modal when available
+      const tag = (btn.tagName || '').toLowerCase();
+      if (tag === 'a') e.preventDefault();
+      const mode = btn.getAttribute('data-open-offer') || 'offer';
+      const cfg = MODES[mode] || MODES.offer;
+      if (subtitle) subtitle.textContent = cfg.sub;
+      if (submitLabel) submitLabel.textContent = cfg.cta;
+      const amount = document.getElementById('offer-amount');
+      if (amount && cfg.amount && !amount.value) amount.value = cfg.amount;
+      if (modal && typeof modal.showModal === 'function') modal.showModal();
+      track('offer-open-' + mode);
+    });
+  });
+
+  document.querySelectorAll('[data-close-offer]').forEach((b) =>
+    b.addEventListener('click', () => { if (modal) modal.close(); }),
+  );
+  document.querySelectorAll('[data-close-success]').forEach((b) =>
+    b.addEventListener('click', () => { if (success) success.close(); }),
+  );
+
+  // Exit-intent: show once per session (desktop mouse-out + mobile idle fallback)
+  let exitShown = false;
+  try { exitShown = sessionStorage.getItem('phx-exit') === '1'; } catch {}
+  function maybeExit() {
+    if (exitShown || (modal && modal.open)) return;
+    exitShown = true;
+    try { sessionStorage.setItem('phx-exit', '1'); } catch {}
+    if (modal && typeof modal.showModal === 'function') {
+      modal.showModal();
+      track('exit-intent-open');
+    }
+  }
+  document.addEventListener('mouseout', (e) => {
+    if (!e.relatedTarget && e.clientY <= 0) maybeExit();
+  });
+  // Mobile: after 75s idle on page without converting
+  setTimeout(() => {
+    if (!exitShown && !document.hidden) maybeExit();
+  }, 75000);
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (errorEl) { errorEl.textContent = ''; errorEl.classList.add('hidden'); }
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get('name') || ''),
+      email: String(data.get('email') || ''),
+      use: String(data.get('use') || ''),
+      amount: Number(data.get('amount') || 0),
+      message: String(data.get('message') || ''),
+      website: String(data.get('website') || ''),
+    };
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span>Submitting…</span>'; }
+    try {
+      const res = await fetch('/api/offer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(out.error || 'Submission failed. Please try email.');
+      track('offer-submit-success');
+      try {
+        localStorage.setItem('phx-offer', JSON.stringify({ ...payload, at: Date.now() }));
+      } catch {}
+      if (modal) modal.close();
+      form.reset();
+      if (success && typeof success.showModal === 'function') success.showModal();
+      // Open prefilled email as a no-loss fallback (user can cancel the draft)
+      if (out.mailto) { setTimeout(() => { window.location.href = out.mailto; }, 1200); }
+    } catch (err) {
+      if (errorEl) {
+        errorEl.textContent = err instanceof Error ? err.message : 'Something went wrong.';
+        errorEl.classList.remove('hidden');
+      }
+      track('offer-submit-error');
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = original; }
+    }
+  });
+</script>
