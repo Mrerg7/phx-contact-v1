@@ -7,7 +7,6 @@ interface Props {
   class?: string;
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
-  responsive?: boolean;
   sizes?: string;
 }
 
@@ -19,10 +18,13 @@ const {
   class: className = '',
   loading = 'lazy',
   fetchpriority = 'auto',
-  responsive = false,
   sizes = '100vw',
 } = Astro.props;
 
+// NOTE: Do not fabricate Cloudflare Images variant URLs (e.g. `/w=640`).
+// Undeclared variants return 403 and break `srcset` candidates. The `public`
+// variant below is verified 200. If resized variants are needed, create them
+// in the Cloudflare Images dashboard (paid account) and pass full URLs here.
 function resolveCfImageUrl(base: string): string {
   const match = base.match(
     /^https:\/\/imagedelivery\.net\/([^/]+)\/([^/]+)(?:\/([^/]+))?$/,
@@ -32,28 +34,17 @@ function resolveCfImageUrl(base: string): string {
   return `https://imagedelivery.net/${account}/${id}/${variant}`;
 }
 
-function variantUrl(base: string, w: number): string {
-  const match = base.match(/^https:\/\/imagedelivery\.net\/([^/]+)\/([^/]+)(?:\/[^/]+)?$/);
-  if (!match) return base;
-  const [, account, id] = match;
-  return `https://imagedelivery.net/${account}/${id}/w=${w}`;
-}
-
 const imageSrc = resolveCfImageUrl(src);
-const srcset = responsive
-  ? [640, 960, 1280, 1920].map((w) => `${variantUrl(src, w)} ${w}w`).join(', ')
-  : undefined;
 ---
 
 <img
   src={imageSrc}
-  srcset={srcset}
-  sizes={responsive ? sizes : undefined}
   alt={alt}
   width={width}
   height={height}
   loading={loading}
   fetchpriority={fetchpriority}
   decoding="async"
+  sizes={sizes}
   class={className}
 />
